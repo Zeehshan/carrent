@@ -1,4 +1,5 @@
 import 'package:car_rental/screen/swiper_terms_screen/screens/rating_reviews.dart';
+import 'package:car_rental/screen/swiper_terms_screen/screens/refund.dart';
 import 'package:car_rental/utils/util.dart';
 import 'package:car_rental/widget/comman_button.dart';
 import 'package:car_rental/widget/drawer.dart';
@@ -15,8 +16,8 @@ class MyInfoPage extends StatefulWidget {
 }
 
 class _MyInfoPageState extends State<MyInfoPage> {
-
   Country _selected;
+
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -26,29 +27,48 @@ class _MyInfoPageState extends State<MyInfoPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(height: h*.04,),
+            SizedBox(
+              height: h * .04,
+            ),
             Row(
               children: <Widget>[
                 IconButton(
-                  icon: Icon(Icons.arrow_back_ios, color: Util.baseColor,size: w*.08,),
-                  onPressed: (){
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Util.baseColor,
+                    size: w * .08,
+                  ),
+                  onPressed: () {
                     Navigator.pop(context);
                   },
                 ),
-                SizedBox(width: 5,),
-                Text("My Information", style: TextStyle(fontSize: w*.05, fontFamily: 'Montserrat-Bold', color: Util.baseColor),),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "My Information",
+                  style: TextStyle(
+                      fontSize: w * .05,
+                      fontFamily: 'Montserrat-Bold',
+                      color: Util.baseColor),
+                ),
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(right: w*.05),
+              padding: EdgeInsets.only(right: w * .05),
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: Text.rich(
                   TextSpan(
                     text: "Change Password",
-                    recognizer: new TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
+                    recognizer: new TapGestureRecognizer()
+                      ..onTap = () => print('Tap Here onTap'),
                   ),
-                  style: TextStyle(decoration: TextDecoration.underline, fontSize: w*.03,color: Util.baseColor,fontFamily: 'Montserrat-Black'),
+                  style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: w * .03,
+                      color: Util.baseColor,
+                      fontFamily: 'Montserrat-Black'),
                 ),
               ),
             ),
@@ -62,7 +82,9 @@ class _MyInfoPageState extends State<MyInfoPage> {
                       hintText: 'first name here',
                     ),
                   ),
-                  SizedBox(width: 20,),
+                  SizedBox(
+                    width: 20,
+                  ),
                   Flexible(
                     child: CustomTextFieldWidget(
                       labelText: 'Last name',
@@ -73,22 +95,24 @@ class _MyInfoPageState extends State<MyInfoPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal:20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: CustomTextFieldWidget(
                 labelText: 'E-mail address',
                 hintText: 'email will here',
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal:20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: CustomTextFieldWidget(
                 labelText: 'Username',
                 hintText: 'username will here',
               ),
             ),
-            SizedBox(height: 25,),
+            SizedBox(
+              height: 25,
+            ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal:20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: <Widget>[
                   Row(
@@ -109,7 +133,9 @@ class _MyInfoPageState extends State<MyInfoPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5,),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Container(
                     height: 1,
                     color: Colors.black38,
@@ -121,7 +147,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
               alignment: Alignment.topLeft,
               child: Container(
                 padding: EdgeInsets.only(left: 20),
-                width: w*.5,
+                width: w * .5,
                 child: CustomTextFieldWidget(
                   labelText: 'Phone number',
                   hintText: '+1 - ',
@@ -129,19 +155,36 @@ class _MyInfoPageState extends State<MyInfoPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal:20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: CustomTextFieldWidget(
                 labelText: 'Address',
                 hintText: 'address will here',
               ),
             ),
-            SizedBox(height: h*.05,),
-            Text("Rating And Review", style: TextStyle(fontSize: w*.03, fontFamily: 'Montserrat-Bold', color: Util.baseColor),),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: h * .05,
+            ),
+            InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context, Util.createRoute(page: RatingAndReviews()));
+                },
+                child: Text(
+                  "Rating And Review",
+                  style: TextStyle(
+                      fontSize: w * .03,
+                      fontFamily: 'Montserrat-Bold',
+                      color: Util.baseColor),
+                )),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Spacer(flex: 5,),
+                Spacer(
+                  flex: 5,
+                ),
                 SmoothStarRating(
                   rating: 4.5,
                   allowHalfRating: false,
@@ -153,14 +196,22 @@ class _MyInfoPageState extends State<MyInfoPage> {
                 Text.rich(
                   TextSpan(
                     text: "More details",
-                    recognizer: new TapGestureRecognizer()..onTap = () => Navigator.push(context, Util.createRoute(page: RatingAndReviews())),
+                    recognizer: new TapGestureRecognizer()
+                      ..onTap = () => Navigator.push(
+                          context, Util.createRoute(page: RatingAndReviews())),
                   ),
-                  style: TextStyle(fontSize: w*.03, fontFamily: 'Montserrat-Black', color: Colors.grey, decoration: TextDecoration.underline),
+                  style: TextStyle(
+                      fontSize: w * .03,
+                      fontFamily: 'Montserrat-Black',
+                      color: Colors.grey,
+                      decoration: TextDecoration.underline),
                 ),
                 Spacer(),
               ],
             ),
-            SizedBox(height: h*.09,),
+            SizedBox(
+              height: h * .09,
+            ),
             CommanButton(
               text: 'Next',
             ),
