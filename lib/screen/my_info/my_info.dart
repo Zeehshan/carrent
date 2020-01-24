@@ -3,6 +3,7 @@ import 'package:car_rental/screen/swiper_terms_screen/screens/refund.dart';
 import 'package:car_rental/utils/util.dart';
 import 'package:car_rental/widget/comman_button.dart';
 import 'package:car_rental/widget/drawer.dart';
+import 'package:car_rental/widget/notification_widget.dart';
 import 'package:car_rental/widget/star_rating.dart';
 import 'package:car_rental/widget/text_field_widget.dart';
 import 'package:flutter/gestures.dart';
