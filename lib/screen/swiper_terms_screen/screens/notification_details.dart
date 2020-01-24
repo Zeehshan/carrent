@@ -50,7 +50,7 @@ class _NotificationDetialsPageState extends State<NotificationDetialsPage> {
               scafoldKey: _scafoldKey,
             ),
             Positioned(
-              top: 160,
+              top: 170,
               bottom: 0,
               child: _body(),
             )
@@ -64,6 +64,7 @@ class _NotificationDetialsPageState extends State<NotificationDetialsPage> {
     return Container(
       width: MediaQuery.of(context).size.width,
       child: ListView(
+        padding: EdgeInsets.zero,
         children: <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -243,7 +244,7 @@ class _NotificationDetialsPageState extends State<NotificationDetialsPage> {
               fontFamily: 'Montserrat-Bold', color: Colors.grey, fontSize: 16),
         ),
         SizedBox(
-          height: size.height * 0.13,
+          height: size.height * 0.14,
         ),
         Column(
           children: <Widget>[

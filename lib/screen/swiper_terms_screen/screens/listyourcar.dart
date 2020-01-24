@@ -691,9 +691,7 @@ class _ListYourCarPageState extends State<ListYourCarPage> {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
+                        child:
                             Text(
                               "*Add photo and one Thumbnail",
                               maxLines: 2,
@@ -703,8 +701,7 @@ class _ListYourCarPageState extends State<ListYourCarPage> {
                                 fontFamily: 'Montserrat-Bold',
                               ),
                             ),
-                          ],
-                        ),
+
                       ),
                     ),
                   ),
@@ -1220,7 +1217,7 @@ class _ListYourCarPageState extends State<ListYourCarPage> {
       style: TextStyle(
           fontFamily: 'calibrib.ttf',
           fontWeight: FontWeight.w900,
-          fontSize: 24,
+          fontSize: 28,
           color: Util.baseColor),
     );
   }

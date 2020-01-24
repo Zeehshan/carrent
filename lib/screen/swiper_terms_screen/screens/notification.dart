@@ -45,7 +45,7 @@ class _NotificationPageState extends State<NotificationPage> {
               scafoldKey: _scafoldKey,
             ),
             Positioned(
-              top: 160,
+              top: 170,
               bottom: 0,
               child: _body(),
             )
