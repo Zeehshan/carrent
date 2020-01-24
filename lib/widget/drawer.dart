@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:car_rental/screen/swiper_terms_screen/screens/listyourcar.dart';
 import 'package:car_rental/screen/swiper_terms_screen/screens/my_info.dart';
+import 'package:car_rental/screen/swiper_terms_screen/screens/notification.dart';
 import 'package:car_rental/screen/swiper_terms_screen/screens/refund.dart';
 import 'package:car_rental/utils/util.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,9 @@ class _DrawerPageState extends State<DrawerPage> {
                 child: Text(
                   "Username",
                   style: TextStyle(
-                      fontFamily: 'Montserrat-Bold',color: Colors.white, fontSize: w * .04),
+                      fontFamily: 'Montserrat-Bold',
+                      color: Colors.white,
+                      fontSize: w * .04),
                 ),
               ),
               Spacer(),
@@ -86,7 +89,9 @@ class _DrawerPageState extends State<DrawerPage> {
           ),
           Text("Home",
               style: TextStyle(
-                  fontFamily: 'Montserrat-Medium',color: Colors.white, fontSize: w * .03)),
+                  fontFamily: 'Montserrat-Medium',
+                  color: Colors.white,
+                  fontSize: w * .03)),
           SizedBox(
             height: 20,
           ),
@@ -168,11 +173,26 @@ class _DrawerPageState extends State<DrawerPage> {
             height: 10,
           ),
           InkWell(
-            onTap: (){
+            onTap: () {
               Navigator.pop(context);
-              Navigator.push(context, Util.createRoute(page: ListYourCarPage()));
+              Navigator.push(
+                  context, Util.createRoute(page: ListYourCarPage()));
             },
             child: Text("List My Car",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Montserrat-Medium',
+                    fontSize: w * .03)),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context, Util.createRoute(page: NotificationPage()));
+            },
+            child: Text("Notification",
                 style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Montserrat-Medium',
@@ -213,7 +233,6 @@ class _DrawerPageState extends State<DrawerPage> {
           SizedBox(
             height: 10,
           ),
-
           InkWell(
               onTap: () {
                 Navigator.pop(context);

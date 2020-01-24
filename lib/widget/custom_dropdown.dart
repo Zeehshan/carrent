@@ -21,35 +21,72 @@ class CustomDropDown extends StatefulWidget {
 class _CustomDropDownState extends State<CustomDropDown> {
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<dynamic>(
-      value: widget.selectedValue?.toString(),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
 
-      icon: Icon(
-        Icons.keyboard_arrow_down,
-        color: Colors.grey[600],
-      ),
-      iconSize: 24,
-      elevation: 20,
-      hint: Text(
-        widget?.hintText ?? "",
-        style: TextStyle(fontFamily: 'Montserrat-Bold',color: Colors.grey,),
-      ),
-      isExpanded: true,
-      style: TextStyle(fontFamily: 'Montserrat-Bold',color: Colors.black,),
-      underline: Container(
-        height: 1,
-        color: Colors.black,
-      ),
-      onChanged: widget.onChangeFun,
-      items: widget.listData.map<DropdownMenuItem<dynamic>>((dynamic value) {
-        return DropdownMenuItem<dynamic>(
-          value: value.toString(),
-          child: Text(
-            value.toString(),
-            style: TextStyle(fontFamily: 'Montserrat-Bold',color: Colors.black,),
+        SizedBox(height: 10,),
+
+        Container(
+          height: 18,
+          child: Padding(
+            padding: const EdgeInsets.only(left:8.0),
+            child: Text(
+              widget?.hintText ?? "",
+              style: TextStyle(
+                fontFamily: 'Montserrat-Bold',
+                color: Colors.grey,
+                fontSize: 16.0
+              ),
+            ),
           ),
-        );
-      }).toList(),
+        ),
+
+        Container(
+          height: 20,
+          child: DropdownButton<dynamic>(
+            value: widget.selectedValue?.toString(),
+            icon: Icon(
+              Icons.keyboard_arrow_down,
+              color: Colors.grey[600],
+            ),
+            iconSize: 24,
+            elevation: 0,
+            isExpanded: true,
+            style: TextStyle(
+              fontFamily: 'Montserrat-Bold',
+              color: Colors.black,
+            ),
+            underline: Container(
+//        height: 1,
+//        color: Colors.black,
+                ),
+            onChanged: widget.onChangeFun,
+            items:
+                widget.listData.map<DropdownMenuItem<dynamic>>((dynamic value) {
+              return DropdownMenuItem<dynamic>(
+                value: value.toString(),
+                child: Text(
+                  value.toString(),
+                  style: TextStyle(
+                    fontFamily: 'Montserrat-Bold',
+                    color: Colors.black,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          color: Colors.black,
+          width: double.maxFinite,
+          height: 1.0,
+        ),
+      ],
     );
   }
 }

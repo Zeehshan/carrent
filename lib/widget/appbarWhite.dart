@@ -91,11 +91,12 @@ class AppBarWhiteCustom extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.topRight,
                     child: InkWell(
-                      child: Image.asset(
-                        'assets/images/drawer.png',
-                        color: Colors.white,
-                        width: screen ? w * .1 : h * .1,
-                      ),
+                      child:Icon(Icons.list,size:screen ?  w * .1 : h * .1 ,color: Colors.white,),
+//                      Image.asset(
+//                        'assets/images/drawer.png',
+//                        color: Colors.white,
+//                        width: screen ? w * .1 : h * .1,
+//                      ),
                       onTap: () {
                         scafoldKey.currentState.openDrawer();
                       },
