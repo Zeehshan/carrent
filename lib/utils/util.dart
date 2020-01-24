@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class Util{
   static const Color baseColor = Color.fromRGBO(255, 116, 21, 1.0);
+  static const Color ratingColor = Color.fromRGBO(245, 187, 27, 1.0);
 
 
 
