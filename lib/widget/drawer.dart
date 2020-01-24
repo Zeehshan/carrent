@@ -1,247 +1,265 @@
-import 'dart:io';
-
+import 'package:car_rental/screen/auth/payment_choice.dart';
+import 'package:car_rental/screen/my_info/my_info.dart';
 import 'package:car_rental/screen/swiper_terms_screen/screens/listyourcar.dart';
-import 'package:car_rental/screen/swiper_terms_screen/screens/my_info.dart';
-import 'package:car_rental/screen/swiper_terms_screen/screens/refund.dart';
 import 'package:car_rental/utils/util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DrawerPage extends StatefulWidget {
-  @override
-  _DrawerPageState createState() => _DrawerPageState();
-}
 
-class _DrawerPageState extends State<DrawerPage> {
-  File _avatar;
-
+class DrawerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Data> _options = <Data>[
+      Data("My Information",(){
+        Navigator.push(context, Util.createRoute(page: MyInfoPage()));
+      }),Data("My Financial Setup",(){
+        Navigator.push(context, Util.createRoute(page: PaymentChoice()));
+      }),
+      Data("My Listed Cars",(){}),Data("My Rented Cars",(){}),Data("My Financial Transaction",(){})];
+    List<Data> _options2 = <Data>[
+      Data("Who we are",(){print("okok");}),Data("Terms of services",(){}),Data("Our privacy policy",(){}),
+      Data("Contact Us",(){})];
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     double l = MediaQuery.of(context).size.longestSide;
-
+    Orientation orien = MediaQuery.of(context).orientation;
+    bool screen = orien == Orientation.portrait ? true : false;
+    Widget _CustomText(text,{bool fontWieghtNormal=false}){
+      return Padding(
+        padding:EdgeInsets.only(left: 20),
+        child: Text(
+            text,
+            style: TextStyle(
+                fontFamily: 'BAUHAUSM.TTF',
+                fontSize: screen?w*.03:h*.03,
+                color: Colors.white,
+                fontWeight: fontWieghtNormal ? FontWeight.normal : FontWeight.bold)),
+      );
+    }
     return Container(
-      color: Util.baseColor,
       height: h,
-      width: w * .8,
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      width: w*.8,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Util.baseColor,Util.baseColor]
+        )
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
-            height: h * .05,
-          ),
-          Row(
-            children: <Widget>[
-              Stack(
+          SizedBox(height: h*.05,),
+          Container(
+            width: w*.8,
+//            padding: EdgeInsets.all(screen? w*.03 : h*.03),
+            child: Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Row(
                 children: <Widget>[
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
-                      width: l / 12,
-                      height: l / 12,
-                      color: Colors.white,
+                      width: l/12,
+                      height: l/12,
+                      color: Colors.grey,
                       child: Center(
                         child: Icon(Icons.person),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: h * .06, left: w * .1),
+                  Container(
+                    padding:EdgeInsets.only(top: screen ? h*.06 : w*.06),
                     child: InkWell(
-                      child: Icon(
-                        Icons.edit,
-                        size: 24,
-                      ),
+                      child: Icon(Icons.edit, size: screen?w*.04:h*.04),
+                    ),
+                  ),
+                  SizedBox(width: screen?w*.04:h*.04,),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: h*.04),
+                    child: Text("Username", style: TextStyle(fontFamily: 'Montserrat-Bold',fontSize: screen?w*.04:h*.04,color: Colors.white),),
+                  ),
+                  Spacer(),
+                  Container(
+                    padding: EdgeInsets.only(top: h*.06,right: 14),
+                      width: screen ?w*.3:h*.3,
+                      child: Image.asset('assets/wlogo.png',fit: BoxFit.fill,)
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            height: 1.5,
+            color: Colors.white,
+
+          ),
+      Flexible(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  _CustomText("Home"),
+                  Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: _CustomText("Change Language"),
+                  ),
+                ],
+              ),
+              SizedBox(height: screen?h*.02 : w*.02,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  _CustomText("How it works"),
+                  Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: Stack(
+                      overflow: Overflow.visible,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(right: 5),
+                          child: Icon(Icons.message, size: screen?w*.08:h*.08,color: Colors.white,),
+                        ),
+                        Positioned(
+                          right: w*.0009,
+                          top: -h*.01,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 2,horizontal: 5),
+                           decoration: BoxDecoration(
+                             color: Colors.red,
+                             borderRadius: BorderRadius.circular(100)
+                           ),
+                            child: Center(child: Text("2",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              SizedBox(
-                width: 12,
+              SizedBox(height: screen?h*.02 : w*.02,),
+              _CustomText("My Profile",fontWieghtNormal: true),
+              SizedBox(height: 20),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(_options.length, ((index){
+                  return Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      splashColor: Colors.white,
+                      onTap: _options[index].onTap,
+                      child: Container(
+                        width: w,
+                        padding:EdgeInsets.symmetric(vertical:6),
+                        child: _CustomText(_options[index].text),
+                      ),
+                    ),
+                  );
+                })),
               ),
-              Padding(
-                padding: EdgeInsets.only(bottom: h * .04),
-                child: Text(
-                  "Username",
-                  style: TextStyle(
-                      fontFamily: 'Montserrat-Bold',color: Colors.white, fontSize: w * .04),
+              SizedBox(height: screen?h*.02 : w*.02,),
+              _CustomText("Go To",fontWieghtNormal: true),
+              SizedBox(height: screen?h*.005 : w*.005,),
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  splashColor: Colors.white,
+                  onTap: (){},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      _CustomText("Book a car(rent)"),
+                      Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: Icon(Icons.add, color: Colors.white,size: screen?w*.08:h*.08,),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Spacer(),
-              Container(
-                  padding: EdgeInsets.only(top: h * .06, right: 14),
-                  width: w * .2,
-                  child: Image.asset(
-                    'assets/logo1.png',
-                    fit: BoxFit.fill,
-                  )),
+              SizedBox(height: screen?h*.004 : w*.004,),
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: (){
+                    print("okokok");
+                    Navigator.pop(context);
+                    Navigator.push(context, Util.createRoute(page: ListYourCarPage()));
+                  },
+                  splashColor: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      _CustomText("List My Car"),
+                      Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: Icon(Icons.search, color: Colors.white,size: screen?w*.08:h*.08,),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(height: screen?h*.03 : w*.03,),
+              _CustomText("About Us",fontWieghtNormal: true),
+              SizedBox(height: screen?h*.02 : w*.02,),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(_options2.length, ((index){
+                  return Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      splashColor: Colors.white,
+                      onTap: _options2[index].onTap,
+                      child: Container(
+                        width: w,
+                        padding:EdgeInsets.symmetric(vertical:6),
+                        child: _CustomText(_options2[index].text),
+                      ),
+                    ),
+                  );
+                })),
+              ),
+              SizedBox(height: screen?h*.01 : w*.01,),
+              _CustomText("Support",fontWieghtNormal: true),
+              SizedBox(height: 5,),
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: (){},
+                  splashColor: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      _CustomText("Get instance Support"),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        width: screen?w*.1:h*.1,
+                          child: Image.asset('assets/supporticon.png',))
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
-          Container(
-            height: 1,
-            color: Colors.grey.withOpacity(0.3),
-            margin: EdgeInsets.symmetric(vertical: 10),
-          ),
-          Text("Home",
-              style: TextStyle(
-                  fontFamily: 'Montserrat-Medium',color: Colors.white, fontSize: w * .03)),
-          SizedBox(
-            height: 20,
-          ),
-          Text("How it works?",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 20,
-          ),
-          Text("My profile",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          InkWell(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, Util.createRoute(page: MyInfoPage()));
-              },
-              child: Text("My Information",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: w * .03))),
-          SizedBox(
-            height: 10,
-          ),
-          Text("My Financial Setup",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          Text("My Listed Cars",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          Text("My Rented Cars",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          Text("My Financial Transaction",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 20,
-          ),
-          Text("Go To",
-              style: TextStyle(
-                  color: Util.baseColor,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Book a rent",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          InkWell(
-            onTap: (){
-              Navigator.pop(context);
-              Navigator.push(context, Util.createRoute(page: ListYourCarPage()));
-            },
-            child: Text("List My Car",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Montserrat-Medium',
-                    fontSize: w * .03)),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Text("About us",
-              style: TextStyle(
-                  color: Util.baseColor,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Who we are",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Terms of services",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Our privacy plicy",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-
-          InkWell(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, Util.createRoute(page: RefundPage()));
-              },
-              child: Text("Contact Us",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Montserrat-Medium',
-                      fontSize: w * .03))),
-          SizedBox(
-            height: 20,
-          ),
-          Text("Support",
-              style: TextStyle(
-                  color: Util.baseColor,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
-          SizedBox(
-            height: 10,
-          ),
-          Text("Get instance support",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'Montserrat-Medium',
-                  fontSize: w * .03)),
+        ),
+      ),
         ],
       ),
     );
   }
+}
+
+class Data{
+  final String text;
+  final GestureTapCallback onTap;
+
+  Data(this.text, this.onTap);
 }

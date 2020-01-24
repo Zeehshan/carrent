@@ -1,8 +1,6 @@
-import 'package:car_rental/screen/swiper_terms_screen/screens/rating_reviews.dart';
-import 'package:car_rental/screen/swiper_terms_screen/screens/refund.dart';
+import 'package:car_rental/screen/my_info/rating_reviews.dart';
 import 'package:car_rental/utils/util.dart';
 import 'package:car_rental/widget/comman_button.dart';
-import 'package:car_rental/widget/drawer.dart';
 import 'package:car_rental/widget/notification_widget.dart';
 import 'package:car_rental/widget/star_rating.dart';
 import 'package:car_rental/widget/text_field_widget.dart';
@@ -17,61 +15,35 @@ class MyInfoPage extends StatefulWidget {
 }
 
 class _MyInfoPageState extends State<MyInfoPage> {
-  Country _selected;
 
+  Country _selected;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     double l = MediaQuery.of(context).size.longestSide;
+    Orientation orien = MediaQuery.of(context).orientation;
+    bool screen = orien == Orientation.portrait ? true : false;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: h * .04,
-            ),
+            SizedBox(height: screen?h*.05:w*.04,),
             Row(
               children: <Widget>[
                 IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Util.baseColor,
-                    size: w * .08,
-                  ),
-                  onPressed: () {
+                  icon: Icon(Icons.arrow_back_ios, color: Util.baseColor,size:screen ?w*.08:h*.08,),
+                  onPressed: (){
                     Navigator.pop(context);
                   },
                 ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  "My Information",
-                  style: TextStyle(
-                      fontSize: w * .05,
-                      fontFamily: 'Montserrat-Bold',
-                      color: Util.baseColor),
+                SizedBox(width: 5,),
+                Text("My Information", style: TextStyle(fontSize:screen?w*.05:h*.05, fontFamily: 'Montserrat-Bold', color: Util.baseColor),),
+                Spacer(),
+                NotificationBadgesWidget(
+                  color: Util.baseColor,
                 ),
               ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: w * .05),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Text.rich(
-                  TextSpan(
-                    text: "Change Password",
-                    recognizer: new TapGestureRecognizer()
-                      ..onTap = () => print('Tap Here onTap'),
-                  ),
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      fontSize: w * .03,
-                      color: Util.baseColor,
-                      fontFamily: 'Montserrat-Black'),
-                ),
-              ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -83,9 +55,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                       hintText: 'first name here',
                     ),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
+                  SizedBox(width: 20,),
                   Flexible(
                     child: CustomTextFieldWidget(
                       labelText: 'Last name',
@@ -96,30 +66,28 @@ class _MyInfoPageState extends State<MyInfoPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal:20),
               child: CustomTextFieldWidget(
                 labelText: 'E-mail address',
                 hintText: 'email will here',
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal:20),
               child: CustomTextFieldWidget(
                 labelText: 'Username',
                 hintText: 'username will here',
               ),
             ),
-            SizedBox(
-              height: 25,
-            ),
+            SizedBox(height: 25,),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal:20),
               child: Column(
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text("${_selected?.name ?? "Country"}"),
+                      Text("${_selected?.name ?? "   Country"}",style: TextStyle(fontFamily: 'Montserrat-Bold',color: Colors.grey,height:.2),),
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: CountryPicker(
@@ -134,9 +102,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
+                  SizedBox(height: 5,),
                   Container(
                     height: 1,
                     color: Colors.black38,
@@ -144,78 +110,70 @@ class _MyInfoPageState extends State<MyInfoPage> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                padding: EdgeInsets.only(left: 20),
-                width: w * .5,
-                child: CustomTextFieldWidget(
-                  labelText: 'Phone number',
-                  hintText: '+1 - ',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20),
+                    width: w*.5,
+                    child: CustomTextFieldWidget(
+                      labelText: 'Phone number',
+                      hintText: '+1 - ',
+                    ),
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsets.only(right: 20,top: screen?h*.09:w*.09),
+                  child: Text.rich(
+                    TextSpan(
+                      text: "Change Password",
+                      recognizer: new TapGestureRecognizer()..onTap = () => print('Tap Here onTap'),
+                    ),
+                    style: TextStyle(decoration: TextDecoration.underline, fontSize: screen?w*.03:h*.04,color: Util.baseColor,fontFamily: 'Montserrat-Black'),
+                  ),
+                ),
+              ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal:20),
               child: CustomTextFieldWidget(
                 labelText: 'Address',
                 hintText: 'address will here',
               ),
             ),
-            SizedBox(
-              height: h * .05,
-            ),
-            InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context, Util.createRoute(page: RatingAndReviews()));
-                },
-                child: Text(
-                  "Rating And Review",
-                  style: TextStyle(
-                      fontSize: w * .03,
-                      fontFamily: 'Montserrat-Bold',
-                      color: Util.baseColor),
-                )),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: h*.05,),
+            Text("Rating And Review", style: TextStyle(fontSize: screen?w*.03:h*.04, fontFamily: 'Montserrat-Bold', color: Util.baseColor),),
+            SizedBox(height: 20,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Spacer(
-                  flex: 5,
-                ),
+                Spacer(flex: screen?4:2,),
                 SmoothStarRating(
                   rating: 4.5,
                   allowHalfRating: false,
                   color: Colors.yellow,
-                  size: 30,
+                  size: screen?30:h*.09,
                   borderColor: Colors.grey,
                 ),
                 Spacer(),
                 Text.rich(
                   TextSpan(
                     text: "More details",
-                    recognizer: new TapGestureRecognizer()
-                      ..onTap = () => Navigator.push(
-                          context, Util.createRoute(page: RatingAndReviews())),
+                    recognizer: new TapGestureRecognizer()..onTap = () => Navigator.push(context, Util.createRoute(page: RatingAndReviews())),
                   ),
-                  style: TextStyle(
-                      fontSize: w * .03,
-                      fontFamily: 'Montserrat-Black',
-                      color: Colors.grey,
-                      decoration: TextDecoration.underline),
+                  style: TextStyle(fontSize: screen?w*.03:h*.04, fontFamily: 'Montserrat-Black', color: Colors.grey, decoration: TextDecoration.underline),
                 ),
-                Spacer(),
+                SizedBox(width: 10,),
               ],
             ),
-            SizedBox(
-              height: h * .09,
-            ),
+            SizedBox(height: h*.09,),
             CommanButton(
               text: 'Next',
             ),
+            SizedBox(height: screen?0.0:20,),
           ],
         ),
       ),
